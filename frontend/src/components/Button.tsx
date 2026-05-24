@@ -2,17 +2,19 @@ interface ButtonProps {
   text: string;
   onClick: () => void;
   loading?: boolean;
+  disabled?: boolean;
 }
 
 export default function Button({
   text,
   onClick,
-  loading
+  loading,
+  disabled
 }: ButtonProps) {
   return (
     <button
       onClick={onClick}
-      disabled={loading}
+      disabled={loading || disabled}
       className="
         w-full
         rounded-lg
@@ -23,6 +25,7 @@ export default function Button({
         transition
         hover:bg-blue-700
         disabled:opacity-50
+        disabled:cursor-not-allowed
       "
     >
       {loading ? "Loading..." : text}
