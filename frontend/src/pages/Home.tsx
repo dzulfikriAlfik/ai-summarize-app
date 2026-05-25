@@ -8,6 +8,7 @@ import type { SummaryResponse } from "../types/summary";
 
 import { summarizeText } from "../api/summarize";
 import Toast from "../components/Toast";
+import { TOAST_DURATION } from "../constants/ui";
 
 export default function Home() {
   const [text, setText] = useState("");
@@ -32,6 +33,7 @@ export default function Home() {
 
     try {
       setLoading(true);
+      setSummary(null);
 
       const result = await summarizeText(text);
 
@@ -48,7 +50,7 @@ export default function Home() {
   
     setTimeout(() => {
       setToast('')
-    }, 2500)
+    }, TOAST_DURATION);
   }
 
   return (

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import envConfig from './config/env.config'
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SummarizeModule } from './summarize/summarize.module';
@@ -8,6 +9,7 @@ import { SummarizeModule } from './summarize/summarize.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      load: [envConfig]
     }),
     SummarizeModule,
   ],

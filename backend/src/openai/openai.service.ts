@@ -1,26 +1,24 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import OpenAI from 'openai';
 
 @Injectable()
 export class OpenaiService {
-  private readonly client: OpenAI;
+  private client: OpenAI;
 
-  constructor() {
+  constructor(private readonly configService: ConfigService) {
     this.client = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
+      apiKey: this.configService.get<string>('openaiApiKey'),
     });
   }
 
   async summarize(text: string) {
     const response = await this.client.chat.completions.create({
       model: 'gpt-4.1-mini',
-
       temperature: 0.2,
-
       response_format: {
         type: 'json_object',
       },
-
       messages: [
         {
           role: 'system',
@@ -44,7 +42,6 @@ export class OpenaiService {
               Negative
             `,
         },
-
         {
           role: 'user',
           content: `

@@ -1,5 +1,7 @@
+import type { Sentiment } from "./sentiment";
+
 export interface SummaryResponse {
   summary: string;
   keywords: string[];
-  sentiment: string;
+  sentiment: Sentiment;
 }

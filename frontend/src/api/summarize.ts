@@ -1,6 +1,8 @@
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export async function summarizeText(text: string) {
   const response = await fetch(
-    'http://localhost:3000/summarize',
+    `${API_BASE_URL}/summarize`,
     {
       method: 'POST',
       headers: {
